@@ -1,0 +1,49 @@
+type message {
+    id: String
+    Type: String
+    SendBy: String
+    Text: String
+    ageversion: Int
+    Timestamp: Date
+}
+type topic {
+    id: String
+    Title: String
+    createdBy: String
+    Text: String
+    ageversion: String
+    Timestamp: Date
+    session: Int
+}
+type getList {
+    getTopics: [topic]
+}
+type messages {
+    Messages: [message]
+}
+extend type Query {
+    getTopics: [topic]
+    getMessages(id: String!): messages
+}
+
+extend type Mutation {
+  addTopic(input: TopicInput!): String
+  addMessage (input: MessageInput!): message
+}
+
+input MessageInput {
+    topicID: String!
+    SendBy: String!
+    text: String!
+    ageversion: Int!
+}
+input TopicInput {
+  title: String!
+  SendBy: String!
+  text: String!
+  ageversion: String!
+  Timestamp: Date!
+  session: Int!
+}
+
+extend type Subscription {}
